@@ -32,6 +32,7 @@ def Credit():
 	Space(9); print "#     Developers Veraildez&Medusa   #"
 	Space(9); print "#    Versa Community Versa Team   #"
 	Space(9); print "#####################################"
+	print("daha yapım aşamasındadır. siteyi yazarken sonuna / koymayin!")
 
 Credit()
 findAdmin()
