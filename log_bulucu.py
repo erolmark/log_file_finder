@@ -1,16 +1,14 @@
 from urllib.request import Request, urlopen, URLError, HTTPError
 
-def Space(j):
-    i = 0
-    while i <= j:
-        print(" ", end='')
-        i += 1
-    print()  # Satır sonu
+def print_spaces(count):
+    """Satır başında verilen sayıda boşluk karakteri basar."""
+    print(" " * count, end='')
 
-def findAdmin():
+def find_admin():
+    """Linkler dosyasındaki her bir bağlantıyı kontrol eder ve başarılı olanları basar."""
     with open("link.txt", "r") as f:
-        link = input("Site İsmini Gir \n(örnek : example.com or www.example.com ): ")
-        print("\n\n Mevcut Linkler: \n")
+        link = input("Site İsmini Gir \n(örnek : example.com veya www.example.com ): ")
+        print("\n\nMevcut Linkler:\n")
         while True:
             sub_link = f.readline().strip()
             if not sub_link:
@@ -19,20 +17,30 @@ def findAdmin():
             req = Request(req_link)
             try:
                 response = urlopen(req)
-            except HTTPError as e:
+            except HTTPError:
                 continue
-            except URLError as e:
+            except URLError:
                 continue
             else:
-                print("Başarılı Log Dosyası=> ", req_link)
+                print("Başarılı Log Dosyası=>", req_link)
 
-def Credit():
-    Space(9); print("#####################################")
-    Space(9); print("#   +++ Log Dosyası Bulucu +++   #")
-    Space(9); print("#     Developers Veraildez&Medusa   #")
-    Space(9); print("#    Versa Community Versa Team   #")
-    Space(9); print("#####################################")
-    print("Daha yapım aşamasındadır. Siteyi yazarken sonuna / koymayın!")
+def print_banner():
+    """Programın başlık ve bilgi kısmını basar."""
+    print_spaces(9)
+    print("#####################################")
+    print_spaces(9)
+    print("#   +++ Log Dosyası Bulucu +++   #")
+    print_spaces(9)
+    print("#     Developers Veraildez&Medusa   #")
+    print_spaces(9)
+    print("#    Versa Community Versa Team   #")
+    print_spaces(9)
+    print("#####################################")
 
-Credit()
-findAdmin()
+def main():
+    """Ana fonksiyon: banner ve find_admin işlevlerini çağırır."""
+    print_banner()
+    find_admin()
+
+if __name__ == "__main__":
+    main()
