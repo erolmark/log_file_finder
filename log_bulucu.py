@@ -1,4 +1,4 @@
-from urllib.request import Request, urlopen, URLError, HTTPError
+import requests
 
 def print_spaces(count):
     """Satır başında verilen sayıda boşluk karakteri basar."""
@@ -14,15 +14,13 @@ def find_admin():
             if not sub_link:
                 break
             req_link = f"http://{link}/{sub_link}"
-            req = Request(req_link)
             try:
-                response = urlopen(req)
-            except HTTPError:
+                response = requests.get(req_link)
+                if response.status_code == 200:
+                    print("Başarılı Log Dosyası=>", req_link)
+            except requests.RequestException as e:
+                # Hata durumunda herhangi bir işlem yapmaya gerek yok
                 continue
-            except URLError:
-                continue
-            else:
-                print("Başarılı Log Dosyası=>", req_link)
 
 def print_banner():
     """Programın başlık ve bilgi kısmını basar."""
